@@ -9,10 +9,7 @@ function SignInForm() {
     <div className="w-full max-w-xs">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Username
           </label>
           <input
@@ -25,10 +22,7 @@ function SignInForm() {
           />
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Password
           </label>
           <input
