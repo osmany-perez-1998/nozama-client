@@ -7,6 +7,7 @@ import mbp2 from "./assets/macbook-pro-2.jpg";
 import mbp3 from "./assets/macbook-pro-3.jpg";
 import basic1 from "./assets/basic-laptop-1.jpg";
 import basic2 from "./assets/basic-laptop-2.jpg";
+import woman1 from "./assets/woman-1.jpg";
 
 export function create(environment = "development") {
   return new Server({
@@ -47,6 +48,7 @@ export function create(environment = "development") {
 
         firstName: "Jorge",
         lastName: "Mederos",
+        avatar: woman1,
         balance: 3000
       });
 
@@ -67,6 +69,7 @@ export function create(environment = "development") {
 
         firstName: "Daniel",
         lastName: "Ortiz",
+        avatar: woman1,
         balance: 3000
       });
 
@@ -87,6 +90,7 @@ export function create(environment = "development") {
 
         firstName: "Osmany",
         lastName: "Perez",
+        avatar: woman1,
         balance: 3000
       });
 
@@ -102,6 +106,13 @@ export function create(environment = "development") {
       });
     },
 
-    routes() {}
+    routes() {
+      this.timing = 2000;
+
+      this.get("/offers");
+      this.get("/offers/:id");
+      this.get("/users");
+      this.get("/users/:id");
+    }
   });
 }
