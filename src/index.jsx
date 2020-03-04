@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./main/App";
 import * as serviceWorker from "./serviceWorker";
+import * as api from "./mock-api";
+
+api.create();
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
