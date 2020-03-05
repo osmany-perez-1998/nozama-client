@@ -2,8 +2,26 @@ import React from "react";
 import { Logo } from "../assets/images";
 import { MenuIcon, SearchIcon, FilterIcon } from "../assets/icons";
 import ProductCard from "./ProductCard";
+import { useState } from "react";
+import { useEffect } from "react";
+import httpClient from "../httpClient";
+import Loading from "../utils/Loading";
 
 function ProductsPage() {
+  const [products, setProducts] = useState(undefined);
+  const [loading, setLoading] = useState(true);
+
+  async function getOffers() {
+    setLoading(true);
+    const { data } = await httpClient.get("/offers");
+    setLoading(false);
+    setProducts(data.data);
+  }
+
+  useEffect(() => {
+    getOffers();
+  }, []);
+
   return (
     <>
       <div className="flex items-baseline justify-between px-4 py-3 bg-gray-900">
@@ -23,7 +41,7 @@ function ProductsPage() {
                 <SearchIcon className="h-6 w-6 fill-current text-gray-600" />
               </div>
               <input
-                className="block w-full bg-gray-900 focus:outline-none focus:bg-white focus:text-gray-900 text-white rounded-lg pl-10 pr-4 py-2"
+                className="block w-full bg-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 text-white rounded-lg pl-10 pr-4 py-2"
                 placeholder="Search by keywords"
               />
             </div>
@@ -37,20 +55,16 @@ function ProductsPage() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4">
-        <ProductCard
-          product={{
-            name: "Dell XPS 9570",
-            price: 1500,
-            rating: 4.5,
-            reviews: 35,
-            seller: {
-              id: "sellerid",
-              username: "Jorge"
-            }
-          }}
-        />
-      </div>
+      {loading && <Loading />}
+      {!loading && products && (
+        <div className="p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {products.map(prod => (
+              <ProductCard key={prod.id} product={prod} />
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }
